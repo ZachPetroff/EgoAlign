@@ -19,7 +19,7 @@ The resulting .csv file will contain the grounded foot at each timestamp, calcul
 
 </p>
 <p align="center">
-	<img src="examples/skeleton_viz.gif" alt="Shadow Viz">
+	<img height="100" min-width="100" src="examples/skeleton_viz.gif" alt="Shadow Viz">
 </p>
 
 DJI:
