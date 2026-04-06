@@ -31,6 +31,11 @@ To track the subject throughout the third-person video and get the corresponding
 
 `python segment_video --frames <path/to/frames> --output <sam2_output.mp4> --fps <output_fps> --checkpoint <path/to/sam.pt> --config <path/to/config.yaml> --out_csv output_bboxes.csv`
 
+</p>
+<p align="center">
+	<img src="examples/sam_mask.png" alt="SAM Mask">
+</p>
+
 - Run SAM2
 - Run ViT
 - Filter ViT using SAM2
