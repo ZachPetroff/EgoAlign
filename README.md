@@ -12,6 +12,7 @@ Dependencies:
 Shadow:
 
 - Detect steps
+  ' python detect_steps.py --shadow_dir <path/to/shadow/> --out_csv <detected_steps.csv>'
 
 DJI:
 
