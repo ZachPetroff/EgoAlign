@@ -49,6 +49,8 @@ To get the 2D pose of the subject in each frame, run the following command:
 	<img src="examples/vitpose.mp4" alt="ViT Pose">
 </p>
 
+![](examples/vitpose.mp4)
+
 - Run ViT
 - Filter ViT using SAM2
 - Find heel intersections
