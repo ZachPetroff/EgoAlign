@@ -44,12 +44,9 @@ To get the 2D pose of the subject in each frame, run the following command:
 
 `python vitpose_inference.py --video <path/to/dji_video.mp4> --output_dir <path/to/vitpose_output> --bbox_csv <path/to/sam_bboxes.csv> --checkpoints_dir <path/to/vitpose_checkpoints>`
 
-</p>
-<p align="center">
-	<img src="examples/vitpose.mp4" alt="ViT Pose">
-</p>
-
-![](examples/vitpose.mp4)
+<video width="640" controls>
+  <source src="examples/vitpose.mp4" type="video/mp4">
+</video>
 
 - Run ViT
 - Filter ViT using SAM2
