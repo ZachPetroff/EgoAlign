@@ -40,7 +40,10 @@ Upon running, you will be prompted to select points belonging to the subject. Af
 
 Upon closing, the script automatically generate the segmentation masks and bounding boxes for the rest of the video.
 
-- Run SAM2
+To get the 2D pose of the subject in each frame, run the following command:
+
+`python vitpose_inference.py --video <path/to/dji_video.mp4> --output_dir <path/to/vitpose_output> --bbox_csv <path/to/sam_bboxes.csv> --checkpoints_dir <path/to/vitpose_checkpoints>`
+
 - Run ViT
 - Filter ViT using SAM2
 - Find heel intersections
