@@ -46,7 +46,7 @@ To get the 2D pose of the subject in each frame, run the following command:
 
 </p>
 <p align="center">
-	<img src="examples/vitpose.gif" alt="ViT Pose">
+	<img height="300" min-width="100" src="examples/vitpose.gif" alt="ViT Pose">
 </p>
 
 - Run ViT
