@@ -27,6 +27,10 @@ The resulting .csv file will contain the grounded foot at each timestamp, calcul
 
 DJI:
 
+To track the subject throughout the third-person video and get the corresponding bounding boxes, run:
+
+`python segment_video --frames <path/to/frames> --output <sam2_output.mp4> --fps <output_fps> --checkpoint <path/to/sam.pt> --config <path/to/config.yaml> --out_csv output_bboxes.csv`
+
 - Run SAM2
 - Run ViT
 - Filter ViT using SAM2
