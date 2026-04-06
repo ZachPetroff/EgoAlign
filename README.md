@@ -13,9 +13,8 @@ Shadow:
 
 To detect foot steps, run the following command:
 
-  >`python detect_steps.py --shadow_dir <path/to/shadow/> --out_csv <detected_steps.csv>`
-
-  >The resulting .csv file will contain the grounded foot at each timestamp using the shadow pressure sensors. The .csv also contains the x, y, and z location of     each body position at every timestamp. 
+  >`python detect_steps.py --shadow_dir <path/to/shadow/> --out_csv <detected_steps.csv>` \
+  The resulting .csv file will contain the grounded foot at each timestamp using the shadow pressure sensors. The .csv also contains the x, y, and z location of     each body position at every timestamp. 
 
   
 
