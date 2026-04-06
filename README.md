@@ -17,9 +17,18 @@ To detect the grounded foot at each time-step, run the following command:
 
 The resulting .csv file will contain the grounded foot at each timestamp, calculated using Shadow's pressure sensors. The .csv also contains the 3D body positions.
 
-<p align="center">
-  <img src="examples/skeleton_viz.gif" />
-</p>
+<img id="shadowGif" src="examples/skeleton_viz.gif" alt="Skeleton visualization">
+
+<button onclick="restartGif()">Restart GIF</button>
+
+<script>
+function restartGif() {
+  const img = document.getElementById('myGif');
+  const src = img.src;
+  img.src = '';        // remove src
+  img.src = src;       // re-assign src to restart
+}
+</script>
 
 DJI:
 
