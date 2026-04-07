@@ -27,6 +27,12 @@ The resulting .csv file will contain the grounded foot at each timestamp, calcul
 
 DJI:
 
+To time-sync the DJI data to the Shadow data, run the following command:
+
+`python time_sync.py --srt_path <DJI.srt> --steps_csv <detected_steps.csv> --pose_dir <path/to/vitpose_output/> --out_csv <out.csv>`
+
+NOTE: The script assumes that the both data streams begin at approximately the same time (within 10 seconds). If this assumption is not true, increase COARSE_MARGIN.
+
 To track the subject throughout the third-person video and get the corresponding bounding boxes, run:
 
 `python segment_video --frames <path/to/frames> --output <sam2_output.mp4> --fps <output_fps> --checkpoint <path/to/sam.pt> --config <path/to/config.yaml> --out_csv output_bboxes.csv`
@@ -56,10 +62,6 @@ After getting the 2D pose keypoints and the grounded foot at each timestamp, fin
 To get the step positions in DJI space, this script extracts the 3D position of the grounded foot at each time-step by projecting the 2D heel position (using camera extrinsics/intrinsics) along a ray and finding where it intersects with the environment. It then filters out outlying points and finds the median heel position within each discrete step.
 
 To get the step positions in Shadow space, foot-slippage artifacts are corrected, then the median heel position within each discrete step event is calculated. 
-
-The script also time syncs the heel positions for later spatial alignment.
-
-
 
 Aria: 
 
