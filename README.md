@@ -49,9 +49,17 @@ To get the 2D pose of the subject in each frame, run the following command:
 	<img height="300" min-width="100" src="examples/vitpose.gif" alt="ViT Pose">
 </p>
 
-- Run ViT
-- Filter ViT using SAM2
-- Find heel intersections
+After getting the 2D pose keypoints and the grounded foot at each timestamp, find median step locations in DJI and Shadow space by running the following command:
+
+`python process_heels.py `
+
+To get the step positions in DJI space, this script extracts the 3D position of the grounded foot at each time-step by projecting the 2D heel position (using camera extrinsics/intrinsics) along a ray and finding where it intersects with the environment. It then filters out outlying points and finds the median heel position within each discrete step.
+
+To get the step positions in Shadow space, foot-slippage artifacts are corrected, then the median heel position within each discrete step event is calculated. 
+
+The script also time syncs the heel positions for later spatial alignment.
+
+
 
 Aria: 
 
