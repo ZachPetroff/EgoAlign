@@ -77,3 +77,7 @@ Align Shadow + DJI + Aria
 - find gaze intersections
 
 View with walk_viewer.py
+
+<ALIGNED PLY FILES>
+<3D HEEL ALIGNMENT>
+<3D FINAL WALK>
