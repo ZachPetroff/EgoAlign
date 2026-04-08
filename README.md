@@ -63,7 +63,7 @@ To get the step positions in DJI space, this script extracts the 3D position of 
 
 To get the step positions in Shadow space, foot-slippage artifacts are corrected, then the median heel position within each discrete step event is calculated. 
 
-Aria: 
+Aria:
 
 - Process semidense points
 
