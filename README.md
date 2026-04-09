@@ -12,7 +12,9 @@ Dependencies:
 - SAM2
 - Shadow.fileio
 - efm3d
-- RealityScan 
+- RealityScan
+- shadow.fileio
+- projectaria
 
 Shadow:
 
