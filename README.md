@@ -11,6 +11,8 @@ Dependencies:
 - ViT Pose
 - SAM2
 - Shadow.fileio
+- efm3d
+- RealityScan 
 
 Shadow:
 
