@@ -127,7 +127,7 @@ pip install projectaria-tools
 > ```bash
 > pip install "projectaria-tools[all]"
 > ```
-> See the [projectaria_tools docs](https://facebookresearch.github.io/projectaria_tools/docs/installation) for troubleshooting.
+> See the [projectaria_tools docs]([https://facebookresearch.github.io/projectaria_tools/docs/installation](https://facebookresearch.github.io/projectaria_tools/)) for troubleshooting.
 
 ---
 
