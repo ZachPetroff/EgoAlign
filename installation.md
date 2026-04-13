@@ -171,7 +171,7 @@ import numpy, scipy, pandas, cv2, matplotlib, open3d, torch, tqdm
 import pytz, timezonefinder
 from projectaria_tools.core import data_provider
 from sam2.build_sam import build_sam2
-import shadow.fileio as sf
+import shadow.shadow.fileio as sf
 print("All imports OK")
 print(f"  torch  {torch.__version__}  CUDA={torch.cuda.is_available()}")
 print(f"  open3d {open3d.__version__}")
