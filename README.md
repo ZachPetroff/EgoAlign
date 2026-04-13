@@ -38,6 +38,7 @@ EgoAlign fuses three heterogeneous data streams, **Shadow MoCap** (body skeleton
 | [projectaria_tools](https://github.com/facebookresearch/projectaria_tools) | Aria device data, MPS eye gaze, and closed-loop trajectory |
 | [RealityScan](https://www.unrealengine.com/en-US/realityscan) | DJI photogrammetry reconstruction (`.ply` + `.json`) |
 
+[Installation Guide](installation.md)
 ---
 
 ## Pipeline Overview
