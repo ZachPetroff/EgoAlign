@@ -13,14 +13,14 @@ Interactive tool to align two 3D reconstructions:
 Usage:
     python align_reconstructions.py [options]
 
-    --source PATH          Source PLY  (default: dji/recon_1.ply)
-    --target PATH          Target PLY  (default: aria/fused_mesh_cleaned.ply)
+    --source PATH          Source PLY (DJI reconstruction)
+    --target PATH          Target PLY (Aria reconstruction)
+    --output PATH          Where to save the transform (.npz)
     --sample-source N      Points to sample from source for picking/ICP  (default: 300000)
     --sample-target N      Points to sample from target  (default: all)
     --icp-threshold T      ICP max-correspondence distance  (default: auto)
     --icp-iterations I     ICP max iterations  (default: 200)
     --no-icp               Skip ICP; only apply Umeyama alignment
-    --output PATH          Where to save the transform  (default: alignment_transform.npz)
 
 Controls in every Open3D window:
     Mouse left-drag        – rotate
@@ -266,24 +266,23 @@ def auto_threshold(source: o3d.geometry.PointCloud, target: o3d.geometry.PointCl
 def main():
     parser = argparse.ArgumentParser(
         description="Align two 3D reconstructions via Umeyama (rigid) + ICP",
-        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
-    parser.add_argument("--source",         default="dji/recon_1.ply",
-                        help="Source PLY file (DJI reconstruction)")
-    parser.add_argument("--target",         default="aria/fused_mesh_cleaned.ply",
-                        help="Target PLY file (Aria reconstruction)")
+    parser.add_argument("--source",         required=True,
+                        help="Source PLY file (DJI reconstruction, e.g. dji/recon_1.ply)")
+    parser.add_argument("--target",         required=True,
+                        help="Target PLY file (Aria reconstruction, e.g. aria/fused_mesh_cleaned.ply)")
+    parser.add_argument("--output",         required=True,
+                        help="Output path for the saved transform (e.g. alignment_transform.npz)")
     parser.add_argument("--sample-source",  type=int, default=300_000,
-                        help="Number of points to sample from source mesh")
+                        help="Number of points to sample from source mesh (default: 300000)")
     parser.add_argument("--sample-target",  type=int, default=None,
-                        help="Number of points to sample from target mesh (None = all)")
+                        help="Number of points to sample from target mesh (default: all)")
     parser.add_argument("--icp-threshold",  type=float, default=None,
                         help="ICP max-correspondence distance (default: auto)")
     parser.add_argument("--icp-iterations", type=int, default=200,
-                        help="ICP max iterations")
+                        help="ICP max iterations (default: 200)")
     parser.add_argument("--no-icp",         action="store_true",
                         help="Skip ICP; apply Umeyama alignment only")
-    parser.add_argument("--output",         default="alignment_transform.npz",
-                        help="Output path for the saved transform (.npz)")
     args = parser.parse_args()
 
     print("=" * 62)

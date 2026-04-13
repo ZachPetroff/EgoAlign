@@ -5,24 +5,21 @@ process_heels.py
 Full pipeline for computing per-step median heel ground-contact positions.
 
 Usage:
-  python process_heels.py [options]
+  python process_heels.py \
+      --pose_dir  vitpose/vitpose_output \
+      --steps_csv time_aligned_steps.csv \
+      --ply_path  dji/recon_1.ply \
+      --json_path dji/recon_1.json \
+      --out_csv   median_heel_positions.csv
 
-  --pose_dir  DIR   Directory of dji_*_keypoints.json ViTPose files
-                    (default: ../vitpose/vitpose_output)
-  --steps_csv FILE  time_aligned_steps.csv path
-                    (default: ../time_aligned_steps.csv)
-  --ply_path  FILE  3D mesh PLY path  (default: ../dji/recon_1.ply)
-  --json_path FILE  NeRF-format camera JSON path  (default: ../dji/recon_1.json)
-  --out_csv   FILE  Output CSV path  (default: ../median_heel_positions.csv)
-
-Input files (defaults are all relative to the parent of this script's directory):
+Input files:
   vitpose/vitpose_output/dji_*_keypoints.json  – ViTPose 2D keypoints
   time_aligned_steps.csv                        – aligned Shadow MoCap data
   dji/recon_1.ply                               – 3D reconstruction mesh
   dji/recon_1.json                              – NeRF-format camera parameters
 
 Output:
-  ../median_heel_positions.csv                  – one row per footstep
+  median_heel_positions.csv                     – one row per footstep
 
 Keypoint indices (COCO-WholeBody 133-keypoint format):
   Left heel  = kp[19]
@@ -701,23 +698,28 @@ def parse_args():
     )
     parser.add_argument(
         "--pose_dir",
-        type=Path
+        type=Path, required=True,
+        help="Directory of dji_*_keypoints.json ViTPose files"
     )
     parser.add_argument(
         "--steps_csv",
-        type=Path
+        type=Path, required=True,
+        help="time_aligned_steps.csv path"
     )
     parser.add_argument(
         "--ply_path",
-        type=Path
+        type=Path, required=True,
+        help="3D mesh PLY path (e.g. dji/recon_1.ply)"
     )
     parser.add_argument(
         "--json_path",
-        type=Path
+        type=Path, required=True,
+        help="NeRF-format camera JSON path (e.g. dji/recon_1.json)"
     )
     parser.add_argument(
         "--out_csv",
-        type=Path
+        type=Path, required=True,
+        help="Output CSV path (e.g. median_heel_positions.csv)"
     )
     return parser.parse_args()
 

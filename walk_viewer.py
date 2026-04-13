@@ -25,9 +25,13 @@ Controls
 Run
 ---
   python3 align_body.py   # (re-)generates detected_steps_aligned.csv
-  python3 walk_viewer.py
+  python3 walk_viewer.py \
+      --ply dji/recon_1.ply \
+      --csv detected_steps_aligned.csv \
+      --frames-dir walk_frames
 """
 
+import argparse
 import csv
 import os
 import time
@@ -35,9 +39,6 @@ import time
 import numpy as np
 import open3d as o3d
 
-PLY_PATH  = "dji/recon_1.ply"
-CSV_PATH  = "detected_steps_aligned.csv"
-FRAMES_DIR = "walk_frames"   # parent folder; each recording gets a timestamped sub-folder
 
 N_MESH_PTS   = 2_000_000
 FRAME_STRIDE = 1
@@ -432,12 +433,36 @@ def _density_to_colors(density: np.ndarray,
 
 # ── Main ───────────────────────────────────────────────────────────────────────
 
+def parse_args():
+    p = argparse.ArgumentParser(
+        description="Interactive 3D viewer: aligned Shadow MoCap skeleton "
+                    "walking through the DJI reconstruction, with optional "
+                    "Aria camera frustum and gaze ray."
+    )
+    p.add_argument("--ply", required=True,
+                   help="DJI reconstruction PLY mesh "
+                        "(e.g. dji/recon_1.ply).")
+    p.add_argument("--csv", required=True,
+                   help="Aligned frames CSV produced by align_body.py "
+                        "(e.g. detected_steps_aligned.csv).")
+    p.add_argument("--frames-dir", required=True,
+                   help="Parent directory for frame-capture recordings; "
+                        "each recording gets a timestamped sub-folder "
+                        "(e.g. walk_frames).")
+    return p.parse_args()
+
+
 def main():
+    args = parse_args()
+    ply_path   = args.ply
+    csv_path   = args.csv
+    frames_dir = args.frames_dir
+
     np.random.seed(42)
 
     # ── Load data ─────────────────────────────────────────────────────────────
-    mesh_xyz, mesh_rgb = load_ply_sample(PLY_PATH, N_MESH_PTS)
-    body, n_total = load_frames(CSV_PATH)
+    mesh_xyz, mesh_rgb = load_ply_sample(ply_path, N_MESH_PTS)
+    body, n_total = load_frames(csv_path)
     frame_indices = np.arange(0, n_total, FRAME_STRIDE)
     n_frames = len(frame_indices)
     print(f"  {n_frames} playback frames  "
@@ -530,7 +555,7 @@ def main():
     def _start_recording():
         """Rewind, enable follow-cam, create a timestamped frames folder, begin capture."""
         timestamp = time.strftime("%Y%m%d_%H%M%S")
-        out_dir = os.path.join(FRAMES_DIR, f"rec_{timestamp}")
+        out_dir = os.path.join(frames_dir, f"rec_{timestamp}")
         os.makedirs(out_dir, exist_ok=True)
         rec_state["tmp_dir"]     = out_dir
         rec_state["count"]       = 0
@@ -735,7 +760,7 @@ def main():
     print("  C          toggle camera-follow  (camera tracks skeleton hips)")
     print("  F          toggle Aria camera frustum + trajectory")
     print("  G          toggle gaze ray  (magenta = mesh intersection)")
-    print(f"  V          start / stop frame capture  → {FRAMES_DIR}/<timestamp>/")
+    print(f"  V          start / stop frame capture  → {frames_dir}/<timestamp>/")
     print("  Q or Esc   quit  (stops any active recording first)")
     print("  Mouse      left-drag=rotate  right-drag=pan  scroll=zoom")
     if aria_ok:

@@ -308,14 +308,14 @@ def parse_args():
     p = argparse.ArgumentParser(
         description="Compute DJI↔Shadow time offset and produce time_aligned_steps.csv"
     )
-    p.add_argument("--srt_path",  type=Path,
+    p.add_argument("--srt_path",  type=Path, required=True,
                    help="DJI .SRT sidecar file")
-    p.add_argument("--steps_csv", type=Path,
+    p.add_argument("--steps_csv", type=Path, required=True,
                    help="Shadow detected_steps.csv")
-    p.add_argument("--pose_dir",  type=Path,
+    p.add_argument("--pose_dir",  type=Path, required=True,
                    help="Directory containing dji_*_keypoints.json files")
-    p.add_argument("--out_csv",   type=Path,
-                   help="Output CSV path")
+    p.add_argument("--out_csv",   type=Path, required=True,
+                   help="Output CSV path (e.g. time_aligned_steps.csv)")
     return p.parse_args()
 
 

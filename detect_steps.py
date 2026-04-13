@@ -48,8 +48,8 @@ def main():
     parser.add_argument(
         "--out_csv",
         type=str,
-        default="detected_steps.csv",
-        help="Output CSV file path"
+        required=True,
+        help="Output CSV file path (e.g. detected_steps.csv)"
     )
 
     args = parser.parse_args()

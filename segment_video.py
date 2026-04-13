@@ -6,8 +6,13 @@ Step 2: Shows the predicted mask on that frame so you can confirm it looks right
 Step 3: Propagates the mask through the rest of the frames and saves the result.
 
 Usage:
-  python segment_video.py --frames path/to/frames/
-  python segment_video.py --frames path/to/frames/ --output result.mp4 --fps 30
+  python segment_video.py \
+      --frames     path/to/frames/ \
+      --output     sam2_output.mp4 \
+      --checkpoint sam2.1_hiera_large.pt \
+      --config     configs/sam2.1/sam2.1_hiera_l.yaml \
+      --out_csv    bboxes.csv \
+      [--fps 30]
 """
 
 import argparse
@@ -234,16 +239,16 @@ def main():
     parser = argparse.ArgumentParser(description="SAM2 Interactive Video Segmentation")
     parser.add_argument("--frames", required=True,
                         help="Path to folder of pre-extracted frames (JPEG/PNG, sorted by name)")
-    parser.add_argument("--output", default="sam2_output.mp4",
-                        help="Output video path (default: sam2_output.mp4)")
+    parser.add_argument("--output", required=True,
+                        help="Output video path (e.g. sam2_output.mp4)")
     parser.add_argument("--fps",    type=float, default=30.0,
                         help="Frames per second for the output video (default: 30)")
-    parser.add_argument("--checkpoint", default="sam2.1_hiera_large.pt",
-                        help="Path to the SAM2 checkpoint (default: sam2.1_hiera_large.pt)")
-    parser.add_argument("--config", default="configs/sam2.1/sam2.1_hiera_l.yaml",
-                        help="Path to the SAM2 model config YAML (default: configs/sam2.1/sam2.1_hiera_l.yaml)")
-    parser.add_argument("--out_csv", default="bboxes.csv",
-                        help="Output CSV file for bounding boxes (default: bboxes.csv)")
+    parser.add_argument("--checkpoint", required=True,
+                        help="Path to the SAM2 checkpoint (.pt file)")
+    parser.add_argument("--config", required=True,
+                        help="Path to the SAM2 model config YAML")
+    parser.add_argument("--out_csv", required=True,
+                        help="Output CSV file for bounding boxes (e.g. bboxes.csv)")
     args = parser.parse_args()
 
     if not os.path.isdir(args.frames):
