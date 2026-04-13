@@ -147,7 +147,6 @@ Download the ViTPose checkpoint(s) you need from the [ViTPose model zoo](https:/
 
 If you run into issues installing chumpy, run the following command: `pip install chumpy --no-build-isolation`
 
-
 ---
 
 ### Shadow fileio
