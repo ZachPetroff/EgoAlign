@@ -16,9 +16,9 @@ EgoAlign fuses three heterogeneous data streams, **Shadow MoCap** (body skeleton
 2. [Pipeline Overview](#pipeline-overview)
 3. [Step-by-Step Usage](#step-by-step-usage)
    - [1. Extract Shadow MoCap data](#1-extract-shadow-mocap-data)
-   - [2. Time-sync DJI to Shadow](#2-time-sync-dji-to-shadow)
-   - [3. Segment subject in DJI video](#3-segment-subject-in-dji-video)
-   - [4. 2D pose estimation with ViTPose](#4-2d-pose-estimation-with-vitpose)
+   - [2. Segment subject in DJI video](#3-segment-subject-in-dji-video)
+    - [3. 2D pose estimation with ViTPose](#4-2d-pose-estimation-with-vitpose)
+   - [4. Time-sync DJI to Shadow](#2-time-sync-dji-to-shadow)
    - [5. Compute median heel positions](#5-compute-median-heel-positions)
    - [6. Align Shadow skeleton to DJI reconstruction](#6-align-shadow-skeleton-to-dji-reconstruction)
    - [7. Process Aria egocentric data](#7-process-aria-egocentric-data)
@@ -46,46 +46,6 @@ EgoAlign fuses three heterogeneous data streams, **Shadow MoCap** (body skeleton
 
 ## Pipeline Overview
 
-```
-Shadow MoCap (.mStream)
-        │
-        ▼
- detect_steps.py  ──────────────────────────────────────────┐
-  detected_steps.csv                                         │
-        │                                                     │
-        │   DJI .SRT + ViTPose keypoints                     │
-        ▼                                                     │
-  time_sync.py                                               │
-  time_aligned_steps.csv                                     │
-        │                                                     │
-        │   DJI frames  ──► segment_video.py ──► SAM2 bboxes │
-        │                         │                           │
-        │                         ▼                           │
-        │              vitpose_inference.py                   │
-        │              ViTPose keypoints                      │
-        │                         │                           │
-        ▼                         ▼                           │
-  process_heels.py ◄──────────────┘                          │
-  median_heel_positions.csv                                   │
-        │                                                     │
-        ▼                                                     │
-  rigid_align.py  (windowed Umeyama)                         │
-  umeyama_transform.npz                                       │
-        │                                                     │
-        │   Aria VRS + MPS ──► process_aria.py               │
-        │   aria/frames.csv + closed_loop_trajectory.csv      │
-        │                                                     │
-        │   align_reconstructions.py (DJI ↔ Aria ICP)        │
-        │   alignment_transform.npz                           │
-        │                                                     │
-        ▼                                                     │
-  align_body.py  ◄────────────────────────────────────────────┘
-  detected_steps_aligned.csv
-        │
-        ▼
-  walk_viewer.py  (interactive 3D viewer)
-```
-
 ---
 
 ## Step-by-Step Usage
@@ -110,29 +70,7 @@ python detect_steps.py \
 </p>
 
 ---
-
-### 2. Time-sync DJI to Shadow
-
-Aligns the DJI video timeline to the Shadow MoCap timeline via a two-stage search:
-
-1. **Coarse** — converts the DJI local timestamp to UTC using the GPS-derived timezone to estimate the clock offset Δ.
-2. **Fine** — sweeps a ±`COARSE_MARGIN`-second window around Δ, maximising the Pearson correlation between the vertical heel oscillation signal in ViTPose keypoints and the Shadow `RightHeel_z − LeftHeel_z` signal.
-
-```bash
-python time_sync.py \
-    --srt_path  dji/DJI_20260228161138_0012_D.SRT \
-    --steps_csv detected_steps.csv \
-    --pose_dir  vitpose/vitpose_output \
-    --out_csv   time_aligned_steps.csv
-```
-
-> **Note:** The script assumes both devices were started at approximately the same time (within 10 seconds). If this assumption does not hold, increase the `COARSE_MARGIN` constant at the top of the script.
-
-**Outputs:** `time_aligned_steps.csv` — Shadow rows resampled to DJI frame rate, with two extra columns: `matched_srt_time` and `dji_frame`.
-
----
-
-### 3. Segment subject in DJI video
+### 2. Segment subject in DJI video
 
 Uses SAM2 to interactively track the subject through the third-person DJI video and produce per-frame bounding boxes.
 
@@ -156,7 +94,7 @@ When launched, you will be prompted to **click a point on the subject** in the f
 
 ---
 
-### 4. 2D pose estimation with ViTPose
+### 3. 2D pose estimation with ViTPose
 
 Runs ViTPose on each DJI frame, cropped to the SAM2 bounding box, to get COCO-WholeBody 133-keypoint 2D poses.
 
@@ -173,6 +111,27 @@ python vitpose_inference.py \
 <p align="center">
   <img height="300" src="examples/vitpose_original.gif" alt="ViTPose keypoints">
 </p>
+
+---
+
+### 4. Time-sync DJI to Shadow
+
+Aligns the DJI video timeline to the Shadow MoCap timeline via a two-stage search:
+
+1. **Coarse** — converts the DJI local timestamp to UTC using the GPS-derived timezone to estimate the clock offset Δ.
+2. **Fine** — sweeps a ±`COARSE_MARGIN`-second window around Δ, maximising the Pearson correlation between the vertical heel oscillation signal in ViTPose keypoints and the Shadow `RightHeel_z − LeftHeel_z` signal.
+
+```bash
+python time_sync.py \
+    --srt_path  dji/DJI_20260228161138_0012_D.SRT \
+    --steps_csv detected_steps.csv \
+    --pose_dir  vitpose/vitpose_output \
+    --out_csv   time_aligned_steps.csv
+```
+
+> **Note:** The script assumes both devices were started at approximately the same time (within 10 seconds). If this assumption does not hold, increase the `COARSE_MARGIN` constant at the top of the script.
+
+**Outputs:** `time_aligned_steps.csv` — Shadow rows resampled to DJI frame rate, with two extra columns: `matched_srt_time` and `dji_frame`.
 
 ---
 
