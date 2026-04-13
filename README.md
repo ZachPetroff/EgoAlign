@@ -81,7 +81,7 @@ python segment_video.py \
     --out_csv    output_bboxes.csv
 ```
 
-When launched, you will be prompted to **click a point on the subject** in the first frame. A preview window then shows the predicted mask so you can verify it before the script propagates the segmentation through the rest of the video automatically.
+When launched, you will be prompted to **click points on the subject** in the first frame. Try to select as many points as possible to completely mask the subject. A preview window then shows the predicted mask so you can verify it before the script propagates the segmentation through the rest of the video automatically.
 
 <p align="center">
   <img src="examples/sam_mask.png" alt="SAM2 mask preview">
