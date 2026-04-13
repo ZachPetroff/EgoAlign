@@ -113,6 +113,9 @@ pip install git+https://github.com/facebookresearch/segment-anything-2.git
 
 Download the model checkpoint you need (e.g. `sam2_hiera_large.pt`) from the [SAM2 github page](https://github.com/facebookresearch/sam2?tab=readme-ov-file) and note its path (you will pass it to `segment_video.py` via `--checkpoint`).
 
+
+config file should be stored in sam_model_folder/configs/sam2.1/
+
 ---
 
 ### projectaria_tools
