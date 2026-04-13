@@ -35,7 +35,7 @@ EgoAlign fuses three heterogeneous data streams, **Shadow MoCap** (body skeleton
 | [Shadow fileio](https://www.motionshadow.com) (`shadow.fileio`) | Read Shadow MoCap `.mStream` / `.mTake` files |
 | [ViTPose](https://github.com/ViTAE-Transformer/ViTPose) | 2D human pose estimation in DJI frames |
 | [SAM2](https://github.com/facebookresearch/segment-anything-2) | Interactive video segmentation for subject tracking |
-| [EFM3D / projectaria_tools](https://github.com/facebookresearch/projectaria_tools) | Aria device data, MPS eye gaze, and closed-loop trajectory |
+| [projectaria_tools](https://github.com/facebookresearch/projectaria_tools) | Aria device data, MPS eye gaze, and closed-loop trajectory |
 | [RealityScan](https://www.unrealengine.com/en-US/realityscan) | DJI photogrammetry reconstruction (`.ply` + `.json`) |
 | Open3D | 3D visualisation and raycasting |
 | NumPy, SciPy, pandas | Numerics and data handling |
