@@ -159,7 +159,7 @@ cd shadow-fileio-python
 python setup.py --install
 ```
 
-
+Change name of folder to "shadow"
 
 ---
 
