@@ -154,10 +154,10 @@ Clone the shadow github to convert motion capture data to .csv:
 ```bash
 git clone https://github.com/motion-workshop/shadow-fileio-python.git
 cd shadow-fileio-python
-python setup.py --install
+pip install .
 ```
 
-Change name of folder to "shadow"
+Move the shadow 
 
 ---
 
