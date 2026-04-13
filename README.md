@@ -25,7 +25,6 @@ EgoAlign fuses three heterogeneous data streams, **Shadow MoCap** (body skeleton
    - [8. Align DJI and Aria reconstructions](#8-align-dji-and-aria-reconstructions)
    - [9. Apply transforms and compute gaze](#9-apply-transforms-and-compute-gaze)
    - [10. Visualise the result](#10-visualise-the-result)
-4. [Output Files](#output-files)
 
 ---
 
