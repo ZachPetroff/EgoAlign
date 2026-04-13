@@ -8,6 +8,7 @@ A toolkit for aligning motion capture, egocentric video, and gaze data into a un
 
 EgoAlign fuses three heterogeneous data streams, **Shadow MoCap** (body skeleton + pressure), **DJI drone video** (third-person photogrammetry), and **Meta Aria** (egocentric video + eye gaze), into a single coordinate frame so they can be visualised and analysed together.
 
+[Installation Guide](installation.md)
 ---
 
 ## Table of Contents
@@ -38,7 +39,6 @@ EgoAlign fuses three heterogeneous data streams, **Shadow MoCap** (body skeleton
 | [projectaria_tools](https://github.com/facebookresearch/projectaria_tools) | Aria device data, MPS eye gaze, and closed-loop trajectory |
 | [RealityScan](https://www.unrealengine.com/en-US/realityscan) | DJI photogrammetry reconstruction (`.ply` + `.json`) |
 
-[Installation Guide](installation.md)
 ---
 
 ## Pipeline Overview
