@@ -145,6 +145,8 @@ cd ..
 
 Download the ViTPose checkpoint(s) you need from the [ViTPose model zoo](https://github.com/ViTAE-Transformer/ViTPose#model-zoo) and note the directory (you will pass it to `vitpose_inference.py` via `--checkpoints_dir`).
 
+If you run into issues installing chumpy, run the following command: `pip install chumpy --no-build-isolation`
+
 
 ---
 
