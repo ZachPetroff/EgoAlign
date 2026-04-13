@@ -133,8 +133,6 @@ pip install projectaria-tools
 
 ### ViTPose
 
-ViTPose is not on PyPI and must be cloned and installed manually.
-
 ```bash
 git clone https://github.com/ViTAE-Transformer/ViTPose.git
 cd ViTPose
@@ -143,7 +141,7 @@ pip install -v -e .
 cd ..
 ```
 
-Download the ViTPose checkpoint(s) you need from the [ViTPose model zoo](https://github.com/ViTAE-Transformer/ViTPose#model-zoo) and note the directory (you will pass it to `vitpose_inference.py` via `--checkpoints_dir`).
+Download the ViTPose++ checkpoint(s) you need from the [ViTPose model zoo](https://github.com/ViTAE-Transformer/ViTPose#model-zoo) and note the directory (you will pass it to `vitpose_inference.py` via `--checkpoints_dir`).
 
 If you run into issues installing chumpy, run the following command: `pip install chumpy --no-build-isolation`
 
